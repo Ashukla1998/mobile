@@ -1,62 +1,116 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Modal,
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import ActivityScreen from './ActivityScreen';
+
+const { width, height } = Dimensions.get('window');
+
+const scale = size => (width / 375) * size; // base width 375 (iPhone 11)
 
 const ProfileScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
-    <View style={styles.container}>
-      {/* Avatar */}
-      <View style={styles.avatarContainer}>
-        <Image
-          source={{ uri: 'https://randomuser.me/api/portraits/women/68.jpg' }}
-          style={styles.avatar}
-        />
-      </View>
-
-      {/* Name and Username */}
-      <Text style={styles.name}>Jane Doe</Text>
-      <Text style={styles.username}>@janedoe</Text>
-
-      {/* Bio */}
-      <Text style={styles.bio}>
-        Designer, traveler, and coffee enthusiast. Exploring the world one pixel at a time.
-      </Text>
-
-      {/* Stats */}
-      <View style={styles.statsContainer}>
-        <View style={styles.statBox}>
-          <Text style={styles.statNumber}>150</Text>
-          <Text style={styles.statLabel}>Posts</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text style={styles.statNumber}>3.4K</Text>
-          <Text style={styles.statLabel}>Followers</Text>
-        </View>
-        <View style={styles.statBox}>
-          <Text style={styles.statNumber}>180</Text>
-          <Text style={styles.statLabel}>Following</Text>
-        </View>
-      </View>
-
-      {/* Buttons */}
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={[styles.button, styles.editButton]}>
-          <Text style={styles.buttonText}>Edit Profile</Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {/* Notification Icon */}
+        <TouchableOpacity
+          style={styles.notificationIcon}
+          onPress={() => setModalVisible(true)}
+        >
+          <Ionicons name="notifications-outline" size={scale(28)} color="#007AFF" />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.followButton]}>
-          <Text style={[styles.buttonText, { color: '#fff' }]}>Follow</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+
+        {/* Avatar */}
+        <View style={styles.avatarContainer}>
+          <Image
+            source={{ uri: 'https://randomuser.me/api/portraits/women/68.jpg' }}
+            style={styles.avatar}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Name and Username */}
+        <Text style={styles.name}>Jane Doe</Text>
+        <Text style={styles.username}>@janedoe</Text>
+
+        {/* Bio */}
+        <Text style={styles.bio}>
+          Designer, traveler, and coffee enthusiast. Exploring the world one pixel at a time.
+        </Text>
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statBox}>
+            <Text style={styles.statNumber}>150</Text>
+            <Text style={styles.statLabel}>Posts</Text>
+          </View>
+          <View style={styles.statBox}>
+            <Text style={styles.statNumber}>3.4K</Text>
+            <Text style={styles.statLabel}>Followers</Text>
+          </View>
+          <View style={styles.statBox}>
+            <Text style={styles.statNumber}>180</Text>
+            <Text style={styles.statLabel}>Following</Text>
+          </View>
+        </View>
+
+        {/* Buttons */}
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity style={[styles.button, styles.editButton]}>
+            <Text style={styles.buttonText}>Edit Profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.followButton]}>
+            <Text style={[styles.buttonText, { color: '#fff' }]}>Follow</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Modal for ActivityScreen */}
+        <Modal
+          visible={modalVisible}
+          animationType="slide"
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+            {/* Close button */}
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={{ fontSize: scale(18), color: '#007AFF' }}>Close</Text>
+            </TouchableOpacity>
+
+            {/* ActivityScreen content */}
+            <ActivityScreen />
+          </SafeAreaView>
+        </Modal>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: '#fff', 
-    paddingHorizontal: 20, 
-    paddingTop: 60,
+  scrollContainer: {
     alignItems: 'center',
+    paddingHorizontal: scale(20),
+    paddingTop: scale(60),
+    paddingBottom: scale(30),
+  },
+  notificationIcon: {
+    position: 'absolute',
+    top: scale(30),
+    right: scale(20),
+    zIndex: 10,
   },
   avatarContainer: {
     elevation: 8,
@@ -64,55 +118,55 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 5 },
-    borderRadius: 75,
-    marginBottom: 20,
+    borderRadius: scale(75),
+    marginBottom: scale(20),
   },
   avatar: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    width: scale(150),
+    height: scale(150),
+    borderRadius: scale(75),
   },
   name: {
-    fontSize: 28,
+    fontSize: scale(28),
     fontWeight: '700',
     color: '#222',
   },
   username: {
-    fontSize: 16,
+    fontSize: scale(16),
     color: '#777',
-    marginVertical: 6,
+    marginVertical: scale(6),
   },
   bio: {
-    fontSize: 16,
+    fontSize: scale(16),
     color: '#555',
     textAlign: 'center',
-    paddingHorizontal: 40,
-    lineHeight: 22,
-    marginBottom: 30,
+    paddingHorizontal: scale(40),
+    lineHeight: scale(22),
+    marginBottom: scale(30),
   },
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '90%',
     backgroundColor: '#f0f0f0',
-    borderRadius: 15,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    marginBottom: 30,
+    borderRadius: scale(15),
+    paddingVertical: scale(20),
+    paddingHorizontal: scale(15),
+    marginBottom: scale(30),
   },
   statBox: {
     alignItems: 'center',
     flex: 1,
   },
   statNumber: {
-    fontSize: 20,
+    fontSize: scale(20),
     fontWeight: '700',
     color: '#222',
   },
   statLabel: {
-    fontSize: 14,
+    fontSize: scale(14),
     color: '#666',
-    marginTop: 4,
+    marginTop: scale(4),
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -121,10 +175,10 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    paddingVertical: 14,
-    borderRadius: 25,
+    paddingVertical: scale(14),
+    borderRadius: scale(25),
     alignItems: 'center',
-    marginHorizontal: 5,
+    marginHorizontal: scale(5),
   },
   editButton: {
     borderWidth: 1,
@@ -135,9 +189,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#007AFF',
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: scale(16),
     fontWeight: '600',
     color: '#555',
+  },
+  closeButton: {
+    padding: scale(15),
+    alignItems: 'flex-end',
+    backgroundColor: '#f9f9f9',
   },
 });
 

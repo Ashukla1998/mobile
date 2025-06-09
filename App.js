@@ -1,21 +1,24 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+// Screens
 import HomeScreen from './screens/HomeScreen';
-import StaticScreen from './screens/StaticScreen';
+import UploadMedia from './screens/Upload';
 import ScreenWrapper from './screens/SearchScreen';
 import ReelsScreen from './screens/ReelsScreen';
-import ActivityScreen from './screens/ActivityScreen';
+// import ActivityScreen from './screens/ActivityScreen';
 import ProfileScreen from './screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <SafeAreaProvider style={{flex:1}}>
+    <SafeAreaProvider style={{ flex: 1 }}>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -26,8 +29,8 @@ export default function App() {
               backgroundColor: '#fff',
               borderTopWidth: 0,
               elevation: 5,
-              height: 80,
-              paddingBottom: 20, 
+              height: Platform.OS === 'ios' ? hp('10%') : hp('9%'), // Responsive height
+              paddingBottom: Platform.OS === 'ios' ? hp('2%') : hp('1.5%'), // Responsive padding
             },
             tabBarIcon: ({ focused, color, size }) => {
               let iconName;
@@ -39,11 +42,11 @@ export default function App() {
                 case 'Search':
                   iconName = focused ? 'search' : 'search-outline';
                   break;
+                case 'Upload':
+                  iconName = focused ? 'cloud-upload' : 'cloud-upload-outline';
+                  break;
                 case 'Reel':
                   iconName = focused ? 'videocam' : 'videocam-outline';
-                  break;
-                case 'Activity':
-                  iconName = focused ? 'notifications' : 'notifications-outline';
                   break;
                 case 'Profile':
                   iconName = focused ? 'person' : 'person-outline';
@@ -55,10 +58,10 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Search" component={ScreenWrapper}/>
+          <Tab.Screen name="Search" component={ScreenWrapper} />
+          <Tab.Screen name="Upload" component={UploadMedia} />
           <Tab.Screen name="Reel" component={ReelsScreen} />
-          <Tab.Screen name="Activity" component={ActivityScreen}/>
-          <Tab.Screen name="Profile" component={ProfileScreen}/>
+          <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
