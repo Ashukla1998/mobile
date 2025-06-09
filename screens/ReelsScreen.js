@@ -82,7 +82,7 @@ const ReelItem = ({ reel, isActive }) => {
     <TouchableWithoutFeedback onPress={() => setShowDetails((v) => !v)}>
       <View style={styles.reel}>
         {isVideo() ? (
-          isActive && playerRef.current ? (
+          playerRef.current ? (
             <VideoView
               player={playerRef.current}
               style={styles.video}
@@ -134,6 +134,11 @@ const ReelItem = ({ reel, isActive }) => {
             <Feather name="share" size={28} color="#fff" />
             <Text style={styles.actionText}>Share</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Feather name="download" size={28} color="#fff" />
+            <Text style={styles.actionText}>Download</Text>
+          </TouchableOpacity>
+
         </View>
 
         {showDetails && (
@@ -240,8 +245,8 @@ const styles = StyleSheet.create({
     right: 100,
   },
   title: {
-    fontSize: 26,
-    fontWeight: '800',
+    fontSize: 15,
+    fontWeight: '400',
     color: '#fff',
     marginBottom: 8,
     textShadowColor: 'rgba(0,0,0,0.85)',
@@ -262,8 +267,8 @@ const styles = StyleSheet.create({
   },
   username: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 15,
+    fontWeight: '800',
     textShadowColor: 'rgba(0,0,0,0.85)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 6,
@@ -271,9 +276,9 @@ const styles = StyleSheet.create({
   actionButtons: {
     position: 'absolute',
     right: 10,
-    bottom: 130,
+    bottom: 170,
     justifyContent: 'space-between',
-    height: 160,
+    height: 320,
   },
   actionButton: {
     alignItems: 'center',
