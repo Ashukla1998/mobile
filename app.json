@@ -20,10 +20,19 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.ashu1998.InstagramClone"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "22ff8508-df33-439a-a1a5-9291c43a3e31"
+      }
+    },
+    "plugins": [
+      "expo-video"
+    ]
   }
 }
