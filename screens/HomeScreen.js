@@ -28,27 +28,31 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
-      {/* Search Bar with Notification Icon */}
-      <View style={styles.searchContainer}>
-        <Icon
-          name="search-outline"
-          size={width * 0.05}
-          color="#999"
-          style={styles.searchIcon}
-        />
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search"
-          placeholderTextColor="#999"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-        />
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
+      {/* Top Bar: Search and Notification */}
+      <View style={styles.topBar}>
+        {/* Search Bar */}
+        <View style={styles.searchWrapper}>
+          <Icon
+            name="search-outline"
+            size={width * 0.05}
+            color="#999"
+            style={styles.searchIcon}
+          />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            placeholderTextColor="#999"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        </View>
+
+        {/* Notification Icon */}
+        <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.notificationButton}>
           <Ionicons
             name="notifications-outline"
             size={scale(24)}
             color="#007AFF"
-            style={styles.notificationIcon}
           />
         </TouchableOpacity>
       </View>
@@ -113,15 +117,23 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#f0f0f0',
   },
 
-  searchContainer: {
+  // Top bar that contains search and notification icon
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: width * 0.04,
+    marginVertical: height * 0.015,
+  },
+
+  // Search bar styling
+  searchWrapper: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    marginHorizontal: width * 0.04,
-    marginVertical: height * 0.015,
     paddingHorizontal: width * 0.03,
     borderRadius: 25,
     height: height * 0.06,
@@ -130,7 +142,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 1,
-    justifyContent: 'space-between',
+    marginRight: 10,
   },
 
   searchIcon: {
@@ -141,11 +153,17 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: width * 0.045,
     color: '#333',
-    marginRight: 10,
   },
 
-  notificationIcon: {
-    marginLeft: 10,
+  notificationButton: {
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 999,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
   },
 
   trendingContainer: {
