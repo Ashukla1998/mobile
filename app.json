@@ -21,7 +21,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.ashu1998.InstagramClone"
+      "package": "com.ashu1998.ShareVibes"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,7 +31,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "970b4ac5-a6f4-4a19-858f-a7a6038de2a5"
+        "projectId": "895f4c7b-8ee1-41f2-8b10-28702bf4765a"
       }
     }
   }
