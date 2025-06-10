@@ -26,13 +26,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "22ff8508-df33-439a-a1a5-9291c43a3e31"
-      }
-    },
     "plugins": [
       "expo-video"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "970b4ac5-a6f4-4a19-858f-a7a6038de2a5"
+      }
+    }
   }
 }
