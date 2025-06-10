@@ -28,15 +28,37 @@ export default function Post({ post }) {
 
 
       {/* Action Icons */}
-      <View style={styles.actions}>
+      {/* <View style={styles.actions}>
         <View style={styles.leftIcons}>
           <Icon name="heart-outline" size={28} color="#000" style={styles.icon} />
           <Icon name="chatbubble-outline" size={28} color="#000" style={styles.icon} />
           <Icon name="paper-plane-outline" size={28} color="#000" />
         </View>
         {/* <Icon name="bookmark-outline" size={24} color="#000" /> */}
-        <Icon name="download-outline" size={28} color="#000" />
+      {/* <Icon name="download-outline" size={28} color="#000" /> */}
+      {/* </View>  */}
+      
+      <View style={styles.actions}>
+        <View style={styles.leftIcons}>
+          <View style={styles.iconWithCount}>
+            <Icon name="heart-outline" size={32} color="#000" />
+            <Text style={styles.iconCount}>{post.likes || '2.4k'}</Text>
+          </View>
+          <View style={styles.iconWithCount}>
+            <Icon name="chatbubble-outline" size={32} color="#000" />
+            <Text style={styles.iconCount}>{post.comments || '1.2k'}</Text>
+          </View>
+          <View style={styles.iconWithCount}>
+            <Icon name="paper-plane-outline" size={32} color="#000" />
+            <Text style={styles.iconCount}>{post.shares || '500'}</Text>
+          </View>
+        </View>
+        <View style={styles.iconWithCount}>
+          <Icon name="download-outline" size={32} color="#000" />
+          <Text style={styles.iconCount}>{post.downloads || '300'}</Text>
+        </View>
       </View>
+
 
       <Text style={styles.caption}>
         <Text style={styles.captionUsername}>{post.username} </Text>
@@ -116,7 +138,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#888',
   },
+  iconWithCount: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 20,
+  },
 
-
-
+  iconCount: {
+    marginLeft: 4,
+    fontSize: 20,
+    color: '#555',
+  },
 });

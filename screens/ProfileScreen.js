@@ -12,13 +12,14 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ActivityScreen from './ActivityScreen';
-
+import SettingsModal from '../Models/Setting';
 const { width, height } = Dimensions.get('window');
 
 const scale = size => (width / 375) * size; // base width 375 (iPhone 11)
 
 const ProfileScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [settingModal,setSettingModal] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -29,6 +30,14 @@ const ProfileScreen = () => {
           onPress={() => setModalVisible(true)}
         >
           <Ionicons name="notifications-outline" size={scale(28)} color="#007AFF" />
+        </TouchableOpacity>
+
+        {/* Setting Icon */}
+        <TouchableOpacity
+          style={styles.settingIcon}
+          onPress={() => setSettingModal(true)}
+        >
+          <Ionicons name="settings-outline" size={scale(28)} color="#007AFF" />
         </TouchableOpacity>
 
         {/* Avatar */}
@@ -89,11 +98,14 @@ const ProfileScreen = () => {
             >
               <Text style={{ fontSize: scale(18), color: '#007AFF' }}>Close</Text>
             </TouchableOpacity>
-
-            {/* ActivityScreen content */}
             <ActivityScreen />
           </SafeAreaView>
         </Modal>
+
+        {settingModal && (
+  <SettingsModal onClose={() => setSettingModal(false)} />
+)}
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -108,9 +120,15 @@ const styles = StyleSheet.create({
   },
   notificationIcon: {
     position: 'absolute',
-    top: scale(30),
+    top: scale(50),
     right: scale(20),
-    zIndex: 10,
+    zIndex: 15,
+  },
+  settingIcon:{
+    position: 'absolute',
+    top: scale(100),
+    right: scale(20),
+    zIndex: 15,
   },
   avatarContainer: {
     elevation: 8,
