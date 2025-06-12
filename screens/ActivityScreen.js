@@ -50,7 +50,7 @@ const ActivityScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', paddingHorizontal: 20, paddingTop: 40 },
+  container: { flex: 1, backgroundColor: '#f0f0f0', paddingHorizontal: 20, paddingTop: 40 },
   header: {
     fontSize: 28,
     fontWeight: 'bold',

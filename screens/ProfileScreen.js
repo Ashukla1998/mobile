@@ -19,7 +19,7 @@ const scale = size => (width / 375) * size; // base width 375 (iPhone 11)
 
 const ProfileScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [settingModal,setSettingModal] = useState(false);
+  const [settingModal, setSettingModal] = useState(false);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -29,7 +29,7 @@ const ProfileScreen = () => {
           style={styles.notificationIcon}
           onPress={() => setModalVisible(true)}
         >
-          <Ionicons name="notifications-outline" size={scale(28)} color="#007AFF" />
+          <Ionicons name="notifications-outline" size={scale(28)} color="white" />
         </TouchableOpacity>
 
         {/* Setting Icon */}
@@ -37,7 +37,7 @@ const ProfileScreen = () => {
           style={styles.settingIcon}
           onPress={() => setSettingModal(true)}
         >
-          <Ionicons name="settings-outline" size={scale(28)} color="#007AFF" />
+          <Ionicons name="settings-outline" size={scale(28)} color="white" />
         </TouchableOpacity>
 
         {/* Avatar */}
@@ -96,15 +96,15 @@ const ProfileScreen = () => {
               style={styles.closeButton}
               onPress={() => setModalVisible(false)}
             >
-              <Text style={{ fontSize: scale(18), color: '#007AFF' }}>Close</Text>
+              <Text style={{ fontSize: scale(18), color: '#841584' }}>Close</Text>
             </TouchableOpacity>
             <ActivityScreen />
           </SafeAreaView>
         </Modal>
 
         {settingModal && (
-  <SettingsModal onClose={() => setSettingModal(false)} />
-)}
+          <SettingsModal onClose={() => setSettingModal(false)} />
+        )}
 
       </ScrollView>
     </SafeAreaView>
@@ -123,12 +123,23 @@ const styles = StyleSheet.create({
     top: scale(50),
     right: scale(20),
     zIndex: 15,
+    backgroundColor: '#841584',
+    padding: 10,
+    borderRadius: 999,
+    elevation: 2,
+    shadowColor: '#000',
   },
-  settingIcon:{
+  settingIcon: {
     position: 'absolute',
     top: scale(100),
     right: scale(20),
     zIndex: 15,
+    backgroundColor: '#841584',
+    padding: 10,
+    borderRadius: 999,
+    elevation: 2,
+    shadowColor: '#000',
+    marginTop:15,
   },
   avatarContainer: {
     elevation: 8,
@@ -201,15 +212,15 @@ const styles = StyleSheet.create({
   editButton: {
     borderWidth: 1,
     borderColor: '#555',
-    backgroundColor: '#fff',
+    backgroundColor: '#A020F0',
   },
   followButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#A020F0',
   },
   buttonText: {
     fontSize: scale(16),
     fontWeight: '600',
-    color: '#555',
+    color: 'white',
   },
   closeButton: {
     padding: scale(15),

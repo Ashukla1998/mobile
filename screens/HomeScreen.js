@@ -9,6 +9,7 @@ import {
   Modal,
   TouchableOpacity,
   Text,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import posts from '../data/posts';
@@ -52,7 +53,7 @@ export default function HomeScreen() {
           <Ionicons
             name="notifications-outline"
             size={scale(24)}
-            color="#007AFF"
+            color="white"
           />
         </TouchableOpacity>
       </View>
@@ -100,12 +101,12 @@ export default function HomeScreen() {
         animationType="slide"
         onRequestClose={() => setModalVisible(false)}
       >
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
           <TouchableOpacity
             style={styles.closeButton}
             onPress={() => setModalVisible(false)}
           >
-            <Text style={{ fontSize: scale(18), color: '#007AFF' }}>Close</Text>
+            <Text style={{ fontSize: scale(18), color: '#A020F0', }}>Close</Text>
           </TouchableOpacity>
           <ActivityScreen />
         </SafeAreaView>
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
   },
 
   notificationButton: {
-    backgroundColor: '#fff',
+    backgroundColor: '#841584',
     padding: 10,
     borderRadius: 999,
     elevation: 2,
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
   },
 
   trendingItem: {
-    backgroundColor: '#e6f0ff',
+    backgroundColor: 'white',
     paddingVertical: 8,
     paddingHorizontal: 14,
     borderRadius: 20,
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
   },
 
   trendingText: {
-    color: '#007AFF',
+    color: '#A020F0',
     fontWeight: '500',
   },
 
@@ -199,5 +200,6 @@ const styles = StyleSheet.create({
   closeButton: {
     padding: scale(16),
     alignItems: 'flex-end',
+    
   },
 });

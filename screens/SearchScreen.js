@@ -130,7 +130,7 @@ const Screen = ({ title }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
+  container: { flex: 1, padding: 20, backgroundColor: '#f0f0f0' },
   header: { fontSize: 24, fontWeight: 'bold', marginBottom: 15, color: '#333' },
   searchInput: {
     borderWidth: 1,
@@ -152,15 +152,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   trendingItem: {
-    backgroundColor: '#e6f0ff',
+    backgroundColor: 'white',
     paddingVertical: 6,
     paddingHorizontal: 12,
-    borderRadius: 20,
+    borderRadius: 25,
     marginRight: 10,
   },
   trendingText: {
-    fontSize: 14,
-    color: 'blue',
+    color: '#A020F0',
+    fontWeight: '500',
   },
 
   gridContainer: {

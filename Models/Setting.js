@@ -138,10 +138,10 @@ const SettingsModal = ({ onClose }) => {
               />
 
               <Pressable
-                style={[styles.closeButton, { marginTop: scale(10), backgroundColor: '#bbb' }]}
+                style={[styles.closeButton, { marginTop: scale(10), backgroundColor: '#841584' }]}
                 onPress={() => setLanguageModalVisible(false)}
               >
-                <Text style={[styles.closeText, { color: '#333' }]}>Cancel</Text>
+                <Text style={[styles.closeText, { color: 'white' }]}>Cancel</Text>
               </Pressable>
             </View>
           </View>
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: scale(20),
     alignSelf: 'center',
-    backgroundColor: '#007AFF',
+    backgroundColor: '#841584',
     paddingHorizontal: scale(25),
     paddingVertical: scale(12),
     borderRadius: scale(25),
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   },
   languageModal: {
     width: '85%',
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f0f0',
     borderRadius: scale(12),
     padding: scale(20),
     alignItems: 'center',
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: scale(10),
     backgroundColor: '#f9f9f9',
-    shadowColor: '#000',
+    shadowColor: '#841584',
     shadowOpacity: 0.05,
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 3,

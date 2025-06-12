@@ -6,7 +6,7 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-  Platform,
+  TouchableOpacity,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useVideoPlayer, VideoView } from 'expo-video';
@@ -23,10 +23,10 @@ export default function UploadMedia() {
   const player = useVideoPlayer(
     isVideo
       ? {
-          source: { uri: media.uri },
-          isLooping: true,
-          useNativeControls: true,
-        }
+        source: { uri: media.uri },
+        isLooping: true,
+        useNativeControls: true,
+      }
       : null
   );
 
@@ -55,7 +55,7 @@ export default function UploadMedia() {
     if (!hasPermission) return;
 
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes:'All',
+      mediaTypes: 'All',
       allowsEditing: true,
       quality: 1,
     });
@@ -102,15 +102,23 @@ export default function UploadMedia() {
       <Text style={styles.title}>Upload Image or Video</Text>
 
       <View style={styles.buttonContainer}>
-        <Button title="Pick from Gallery" onPress={pickMedia} />
+        <TouchableOpacity style={styles.customButton} onPress={pickMedia}>
+          <Text style={styles.buttonText}>Pick from Gallery</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title="Take Photo" onPress={takePhoto} />
+        {/* <Button title="Take Photo" onPress={takePhoto} /> */}
+        <TouchableOpacity style={styles.customButton} onPress={takePhoto}>
+          <Text style={styles.buttonText}>Take Photo</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title="Record Video" onPress={recordVideo} />
+        {/* <Button title="Record Video" onPress={recordVideo} /> */}
+        <TouchableOpacity style={styles.customButton} onPress={recordVideo}>
+          <Text style={styles.buttonText}>Record Video</Text>
+        </TouchableOpacity>
       </View>
 
       {media && (
@@ -142,16 +150,29 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f0f0f0',
   },
   title: {
     fontSize: 24,
     marginBottom: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    // color:'white'
   },
   buttonContainer: {
     marginVertical: 10,
+  },
+  customButton: {
+    backgroundColor: '#A020F0',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   preview: {
     marginTop: 30,

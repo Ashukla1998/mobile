@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function Post({ post }) {
@@ -12,8 +12,11 @@ export default function Post({ post }) {
           <Text style={styles.username}>{post.username}</Text>
           <Text style={styles.views}>22M views</Text>
         </View>
-        <TouchableOpacity style={{ marginLeft: 'auto' }}>
+        {/* <TouchableOpacity style={{ marginLeft: 'auto' }}>
           <Icon name="ellipsis-horizontal" size={18} color="#333" />
+        </TouchableOpacity> */}
+        <TouchableOpacity style={styles.customButton} onPress={() => {/* handle press */}}>
+          <Text style={styles.buttonText}>Follow</Text>
         </TouchableOpacity>
       </View>
 
@@ -37,24 +40,24 @@ export default function Post({ post }) {
         {/* <Icon name="bookmark-outline" size={24} color="#000" /> */}
       {/* <Icon name="download-outline" size={28} color="#000" /> */}
       {/* </View>  */}
-      
+
       <View style={styles.actions}>
         <View style={styles.leftIcons}>
           <View style={styles.iconWithCount}>
-            <Icon name="heart-outline" size={32} color="#000" />
+            <Icon name="heart-outline" size={25} color="#000" />
             <Text style={styles.iconCount}>{post.likes || '2.4k'}</Text>
           </View>
           <View style={styles.iconWithCount}>
-            <Icon name="chatbubble-outline" size={32} color="#000" />
+            <Icon name="chatbubble-outline" size={25} color="#000" />
             <Text style={styles.iconCount}>{post.comments || '1.2k'}</Text>
           </View>
           <View style={styles.iconWithCount}>
-            <Icon name="paper-plane-outline" size={32} color="#000" />
+            <Icon name="paper-plane-outline" size={25} color="#000" />
             <Text style={styles.iconCount}>{post.shares || '500'}</Text>
           </View>
         </View>
         <View style={styles.iconWithCount}>
-          <Icon name="download-outline" size={32} color="#000" />
+          <Icon name="download-outline" size={25} color="#000" />
           <Text style={styles.iconCount}>{post.downloads || '300'}</Text>
         </View>
       </View>
@@ -86,6 +89,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   username: {
+    flexDirection: 'column',
     fontWeight: '600',
     fontSize: 14,
     color: '#333',
@@ -146,7 +150,19 @@ const styles = StyleSheet.create({
 
   iconCount: {
     marginLeft: 4,
-    fontSize: 20,
+    fontSize: 18,
     color: '#555',
+  },
+  customButton: {
+    marginLeft: 'auto',
+    backgroundColor: '#841584',
+    borderRadius: 25,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 14,
   },
 });
