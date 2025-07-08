@@ -165,6 +165,7 @@
 //   },
 // });
 // app/index.js
+
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
@@ -174,12 +175,36 @@ import EmojiModal from '../components/EmojiModal';
 import ImageViewer from '../components/ImageViewer';
 import DraggableEmoji from '../components/DraggableEmoji';
 import CirculeButton from '../components/CirculeButton';
-
+import TextModal from '../components/TextModal';
+import DraggableText from '../components/DraggableText';
 export default function HomeScreen() {
   const [image, setImage] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [emojiList, setEmojiList] = useState([]);
+  const [isTextModalVisible, setIsTextModalVisible] = useState(false);
+  const [textList, setTextList] = useState([]);
+  const [imageLayout, setImageLayout] = useState(null);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+
+
+  const handleTextSubmit = (text) => {
+    // console.log(text);
+    const screenWidth = Dimensions.get('window').width;
+    const imageWidth = screenWidth * 0.9;
+    const imageHeight = imageWidth * (420 / 320);
+
+    setTextList(prev => [
+      ...prev,
+      {
+        text,
+        x: imageWidth / 2 - 40,
+        y: imageHeight / 2 - 20,
+      }
+    ]);
+  };
+
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({ quality: 1 });
@@ -215,13 +240,23 @@ export default function HomeScreen() {
     setIsModalVisible(false);
   };
 
+  const handleReset = () => {
+    setEmojiList([]);
+    setTextList([]);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <ImageViewer imageSource={require('../assets/images/placeholder.jpg')} selectedImage={image}>
+        <ImageViewer imageSource={require('../assets/images/placeholder.jpg')} selectedImage={image} onImageLayout={(layout) => setImageLayout(layout)}>
           {emojiList.map((item, index) => (
             <DraggableEmoji key={index} emoji={item.emoji} startX={item.x} startY={item.y} />
           ))}
+          {textList.map((item, index) => (
+            <DraggableText key={`text-${index}`} text={item.text} startX={item.x} startY={item.y} />
+          ))}
+          {/* <DraggableText text="TEST" startX={100} startY={100} /> */}
+
         </ImageViewer>
       </View>
 
@@ -231,15 +266,50 @@ export default function HomeScreen() {
         onEmojiSelected={handleEmojiSelected}
       />
 
+      <TextModal
+        isVisible={isTextModalVisible}
+        onClose={() => setIsTextModalVisible(false)}
+        onTextSubmit={handleTextSubmit}
+      />
+
+      {isMenuVisible && (
+        <View style={styles.floatingMenu}>
+          <TouchableOpacity style={styles.menuItem} onPress={() => {
+            setIsModalVisible(true);
+            setIsMenuVisible(false);
+          }}>
+            <MaterialIcons name="emoji-emotions" size={28} color="#fff" />
+            <Text style={styles.menuLabel}>Emoji</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItem} onPress={() => {
+            setIsTextModalVisible(true);
+            setIsMenuVisible(false);
+          }}>
+            <MaterialIcons name="text-fields" size={28} color="#fff" />
+            <Text style={styles.menuLabel}>Text</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItem} onPress={() => {
+            alert("Add Music Pressed");
+            setIsMenuVisible(false);
+          }}>
+            <MaterialIcons name="music-note" size={28} color="#fff" />
+            <Text style={styles.menuLabel}>Music</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+
+
       {showOptions ? (
         <View style={styles.optionsRow}>
-          <TouchableOpacity style={styles.iconButton} onPress={() => setEmojiList([])}>
+          <TouchableOpacity style={styles.iconButton} onPress={handleReset}>
             <MaterialIcons name="refresh" size={40} color="#007AFF" />
             <Text style={styles.iconLabel}>Reset</Text>
           </TouchableOpacity>
 
-          <CirculeButton onPress={() => setIsModalVisible(true)} />
-
+          <CirculeButton onPress={() => setIsMenuVisible(true)} />
           <TouchableOpacity style={styles.iconButton} onPress={() => alert('Share pressed')}>
             <MaterialIcons name="share" size={28} color="#007AFF" />
             <Text style={styles.iconLabel}>Share</Text>
@@ -283,5 +353,27 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontSize: 14,
   },
+  floatingMenu: {
+    position: 'absolute',
+    bottom: 100,
+    flexDirection: 'row',
+    backgroundColor: '#1c1c1e',
+    padding: 10,
+    borderRadius: 12,
+    gap: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    zIndex: 100,
+  },
+  menuItem: {
+    alignItems: 'center',
+  },
+  menuLabel: {
+    color: '#fff',
+    fontSize: 12,
+    marginTop: 4,
+  },
+
 
 });
