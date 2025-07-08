@@ -165,6 +165,7 @@
 //   },
 // });
 // app/index.js
+
 import { MaterialIcons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
